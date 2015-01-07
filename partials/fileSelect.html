@@ -15,7 +15,7 @@
         <a ng-click='OpenFileDialog()' class="defaultButton">
           Izberi
         </a>
-        <input id="hiddenFileDialog" type="file" multiple accept=".txt" hidden />
+        <input ng-model="hiddenFileDialog" id="hiddenFileDialog" type="file" multiple accept=".txt" hidden />
       </div>
       <div data-fail="true" class="elementRowSmall" style="text-align: center; font-size: 11pt; opacity:0.7;">
         Dovoljeni tipi: .txt, .doc, .docx
@@ -34,10 +34,10 @@
       </div>
       <div class="elementRowRight">
         <div id="fileCounter">
-          <span id="countText">
-            Ni izbranih dokumentov.
+          <span ng-show="!(listOfFiles.length)" id="countText">
+            Ni izbranih datotek
           </span>
-          <span id="fileNr"></span>
+          <span ng-show="listOfFiles.length" id="fileNr">Število datotek: {{ listOfFiles.length }}</span>
           <span class="entypo-down-open ddIcon"></span>
         </div>
       </div>

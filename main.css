@@ -1,0 +1,363 @@
+#fileSelectButton
+[class*=entypo-]:before {
+	font-family:entypo, sans-serif;
+}
+
+html,body {
+	width:100%;
+	height:100%;
+	position: relative;
+	overflow: hidden;
+}
+
+* {
+	cursor:default;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	margin:0;
+	padding:0;
+}
+
+#windowControlBar {
+	height:23pt;
+	background:#212121;
+	-webkit-app-region:drag;
+}
+
+#windowTitle {
+	position:absolute;
+	left:30pt;
+	color:#f5f5f5;
+	line-height:20pt;
+	font-family:Oxygen;
+	font-size:11pt;
+}
+
+#windowControlBar ul {
+	position:absolute;
+	right:0;
+	list-style:none;
+	margin:1pt 3pt;
+}
+
+#windowControlBar ul li {
+	float:left;
+	margin-left:1pt;
+}
+
+#controlMinButton {
+	color:#f5f5f5;
+	font-size:12pt;
+	display:inline-block;
+	width:20pt;
+	text-align:center;
+	-webkit-transition:background 420ms;
+	-webkit-app-region:no-drag;
+}
+
+#controlMinButton:hover {
+	background:#1976D2;
+}
+
+#controlCloseButton {
+	color:#f5f5f5;
+	font-size:10pt;
+	display:inline-block;
+	height:15pt;
+	line-height:13pt;
+	text-align:center;
+	width:45px;
+	background:#E57373;
+	-webkit-transition:background 420ms;
+	-webkit-app-region:no-drag;
+}
+
+#controlCloseButton:hover {
+	background:#C62828;
+}
+
+.bodyDiv {
+	display:block;
+	background:#F6F6F6;
+	height:100%;
+	width: 100%;
+	position: absolute;
+	-webkit-transition:opacity 700ms;
+}
+
+.pageFrame {
+	width:90vw;
+	display:block;
+	margin:0 auto;
+}
+
+.elementRow {
+	display:block;
+	margin-bottom:10pt;
+	font-family:Oxygen;
+	font-weight:300;
+	padding:4pt 0;
+}
+
+.elementRow::after {
+	content:' ';
+	line-height:1px;
+	clear:both;
+	display:block;
+}
+
+.elementRow .elementRowLeft {
+	width:50%;
+	float:left;
+	text-align:right;
+}
+
+.elementRow .elementRowRight {
+	width:50%;
+	float:right;
+}
+
+h1 {
+	font-family:Oxygen;
+	font-size:30pt;
+	font-weight:300;
+	text-align:center;
+}
+
+.elementdescription {
+	font-family:Oxygen;
+	font-size:11pt;
+	font-weight:300;
+	text-align:center;
+	display:block;
+}
+
+.defaultButton {
+	display:inline-block;
+	font-family:Oxygen;
+	font-weight:700;
+	font-size:17pt;
+	text-align:center;
+	background:#9E9E9E;
+	border:1px #212121 solid;
+	-webkit-box-shadow:2pt 2pt 0 0 rgba(50,50,50,1);
+	-webkit-transition:background 420ms color 600ms;
+	margin:0 auto;
+	padding:7pt;
+	min-width: 60pt;
+	position: static;
+	overflow: visible;
+}
+
+.finishButton {
+	display:inline-block;
+	font-family:Oxygen;
+	font-weight:700;
+	font-size:20pt;
+	text-align:center;
+	width:auto;
+	background:#9E9E9E;
+	border:1px #212121 solid;
+	min-width:80pt;
+	-webkit-box-shadow:2pt 2pt 0 0 rgba(50,50,50,1);
+	-webkit-transition:background 420ms color 600ms;
+	margin:0 auto;
+	padding:13pt;
+}
+
+.defaultButton:hover,.finishButton:hover {
+	background:#0277BD;
+	color:#f5f5f5;
+}
+
+.defaultButton:active,.finishButton:active {
+	-webkit-box-shadow:none;
+	background:#01579B;
+	margin:0;
+}
+
+#dropCover {
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:rgba(80,80,80,.7);
+	z-index:1000;
+	display:none;
+}
+
+#fileDropper {
+	width:70vw;
+	height:70vh;
+	background:#FFF;
+	font-size:30pt;
+	font-weight:300;
+	color:#212121;
+	text-align:center;
+	line-height:70vh;
+	font-family:Oxygen;
+	margin:15vh auto;
+}
+
+.blur {
+	-webkit-filter:blur(1pt);
+}
+
+#fileCounter {
+	font-family:Oxygen;
+	font-weight:300;
+	font-size:14pt;
+	margin-left:4pt;
+	position:relative;
+	padding:4pt 4pt 4pt 13pt;
+}
+
+#fileNr {
+	font-weight:700;
+}
+
+.fileListOpener:hover {
+	background:#90CAF9;
+	-webkit-transition:background 520ms;
+}
+
+#fileCounter .ddIcon {
+	font-size:40pt;
+	line-height:40pt;
+	position:absolute;
+	top:-16pt;
+	right:10pt;
+	color:transparent;
+	-webkit-transition:color 420ms;
+}
+
+#fileCounter.fileListOpener:hover .ddIcon {
+	color:#212121;
+}
+
+.elementRow .elementRowBig,.elementRow .elementRowSmall {
+	width:100%;
+	display:block;
+	position: relative;
+	overflow: visible;
+}
+.errorFlyer
+{
+	position: absolute;
+	height: 20pt;
+	top: 5pt;
+	left: -webkit-calc(50% + 23pt);
+	padding: 2pt 7pt;
+	line-height: 20pt;
+	background: #E53935;
+	border: 1px #B71C1C solid;
+	font-weight: normal;
+	width: auto !important;
+	font-size: 12pt;
+	overflow: visible;
+	-webkit-transition: left 420ms ease-in;
+	-webkit-animation: flying 1.37s;
+}
+.defaultButton:hover .errorFlyer
+{
+
+	color: black;
+	left: -webkit-calc(50% + 37pt);
+}
+
+.pulse
+{
+	-webkit-animation: pulse 1s linear infinite;
+}
+
+@-webkit-keyframes flying {
+    0%
+    {
+    	left: 68%;
+    	opacity: 0;
+    }
+    100%
+    {
+    	opacity: 1;
+    }
+}
+.resultsList
+{
+	font-family: Oxygen;
+	overflow: auto;
+	height: -webkit-calc(100% - 60pt);
+}
+.fileResult
+{
+	width: 100%;
+	background: #E3F2FD;
+	margin: 0 0 13pt 0;
+}
+.fileResult .fileName
+{
+	display: block;
+	background: #0277BD;
+	padding: 4pt;
+	font-weight: bold;
+	color:#f5f5f5;
+	border: 1px #0D47A1 solid;
+}
+.fileResult .fileName:before
+{
+	content:'Rezultati za datoteko ';
+}
+.detectedResult
+{
+	display: block;
+	margin: 8pt 2pt;
+	padding: 4pt 0 10pt 0;
+	border-bottom: 1pt #0D47A1 dashed;
+
+}
+.fileName2
+{
+	display: block;
+	background: #90CAF9;
+	margin: 3pt 14pt;
+	padding: 1pt;
+	width: 40%;
+	border: 1px #0277BD solid;
+}
+.resultData
+{
+
+}
+.resultData:after
+{
+	content: ' ';
+	display: block;
+	width: 100%;
+	line-height: 1pt;
+	clear: both;
+}
+
+.resultLeft
+{
+	width: -webkit-calc(100% - 140pt);
+	float: left;
+
+}
+.detectionValue
+{
+	font-weight: bold;
+	font-size: 40pt;
+	float: right;
+	width: 140pt;
+	text-align: center;
+}
+.detectedText
+{
+	padding: 2pt;
+	background: #f5f5f5;
+	-webkit-user-select: text;
+	cursor: auto;
+	margin: 7pt;
+}
+#pageTwo .pageFrame
+{
+	height: 100%;
+}

@@ -1,0 +1,59 @@
+<div class="bodyDiv">
+  <div class="pageFrame">
+    <div class="elementRow">
+      <div class="elementRowBig">
+        <h1>Izberi datoteke</h1>
+      </div>
+      <div class="elementRowSmall">
+        <span class="elementdescription">
+          Izberi datoteke, ki jih želiš primerjati, ali pa jih povleci v program.
+        </span>
+      </div>
+    </div>
+    <div class="elementRow">
+      <div class="elementRowBig" style="text-align: center;">
+        <a ng-click='OpenFileDialog()' class="defaultButton">
+          Izberi
+        </a>
+        <input id="hiddenFileDialog" type="file" multiple accept=".txt" hidden />
+      </div>
+      <div data-fail="true" class="elementRowSmall" style="text-align: center; font-size: 11pt; opacity:0.7;">
+        Dovoljeni tipi: .txt, .doc, .docx
+      </div>
+    </div>
+    <div class="elementRow">
+      <div class="elementRowLeft">
+        <div class="elementRowSmall">
+          <label for="stringMatchCB">Uporabi String Matching</label>
+          <input type="checkbox" ng-model="stringMatchCB" />
+        </div>
+        <div class="elementRowSmall">
+          <label for="bowCB">Uporabi Bag of Words</label>
+          <input type="checkbox" ng-model="bagOfWordsCB" />
+        </div>
+      </div>
+      <div class="elementRowRight">
+        <div id="fileCounter">
+          <span id="countText">
+            Ni izbranih dokumentov.
+          </span>
+          <span id="fileNr"></span>
+          <span class="entypo-down-open ddIcon"></span>
+        </div>
+      </div>
+    </div>
+    <div class="elementRow">
+      <div class="elementRowBig" style="text-align: center;">
+        <input type="checkbox" ng-model="showContentCB">
+        <label for="prikaziVsebinoCB">Prikaži vsebino dokumentov.</label>
+      </div>
+    </div>
+    <div class="elementRow" >
+      <div class="elementRowBig" style="text-align: center;">
+        <a class="finishButton" id="checkFilesButton">
+          Preveri
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

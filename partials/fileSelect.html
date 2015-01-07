@@ -1,4 +1,5 @@
 <div class="bodyDiv">
+  <div class="bodyDisabled" ng-if="dialogOpen"></div>
   <div class="pageFrame">
     <div class="elementRow">
       <div class="elementRowBig">
@@ -28,8 +29,8 @@
           <input type="checkbox" ng-model="stringMatchCB" />
         </div>
         <div class="elementRowSmall">
-          <label for="bowCB">Uporabi Bag of Words</label>
-          <input type="checkbox" ng-model="bagOfWordsCB" />
+          <label for="cb2" title="Prikaže samo rezultate, ki imajo višjo podovnost kot rezultati enako primerjanih datotek.">Počisti rezultate</label>
+          <input id="cb2" type="checkbox" ng-model="clearResultsCB" />
         </div>
       </div>
       <div class="elementRowRight">
@@ -50,7 +51,7 @@
     </div>
     <div class="elementRow" >
       <div class="elementRowBig" style="text-align: center;">
-        <a class="finishButton" id="checkFilesButton">
+        <a class="finishButton" ng-click="CheckFiles()">
           Preveri
         </a>
       </div>

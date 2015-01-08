@@ -15,17 +15,19 @@ app.config(['$routeProvider', function($routeProvider) {
 //services.js
 app.factory('Files', function() {
   var List = []
+  var showContent = false;
 
   var addFile = function(file) {
     List.push(file);
   }
   var setList = function(files) {
-    console.log("getting", files);
     List = files;
   }
   var getList = function() {
-    console.log("returning", List);
     return List;
+  }
+  var setContent = function(ct) {
+    showContent = ct;
   }
   return {
     setList: setList,
@@ -80,7 +82,6 @@ app.controller('FileSelectController', function($scope, $location, Files) {
 
 app.controller('ResultsController', function($scope, Files) {
   $scope.listOfFiles = Files.getList();
-  console.log($scope.listOfFiles);
   var orgFiles = $scope.listOfFiles.slice(0);
   var priFiles = $scope.listOfFiles.slice(0);
   var finalResult = [];
@@ -91,7 +92,26 @@ app.controller('ResultsController', function($scope, Files) {
     })
   })
   $scope.results = finalResult;
-})
+  Detektor.CleanResults(finalResult);
+  console.log($scope.results);
+  $scope.hoverItem = function(id) {
+    if (angular.element('.' + id).length > 1)
+      angular.element('.' + id).addClass('stavekHovered');
+  }
+  $scope.unhoverItem = function() {
+    angular.element('.stavekHovered').removeClass('stavekHovered');
+  }
+  $scope.sumaVrednosti = function(index) {
+    console.log("here");
+    var vsota = 0;
+    var i = 0;
+    $scope.results[index].cleanResults.forEach(function(a) {
+      vsota += a.vrednost;
+      i++;
+    })
+    return Math.round((vsota / i) * 100);
+  }
+});
 
 function ResizeAnimate(width, height, ms) {
   var scrHeight = window.screen.availHeight

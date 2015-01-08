@@ -1,19 +1,52 @@
 <div class="bodyDiv">
-    <h1>Rezultati</h1>
+  <div class="pageHeader">
+    <div class="header30">
+      <input ng-model="rangeVal" type="range" ng-model="threshold" max="1" min="0" step="0.01" value="0.7" />
+    </div>
+    <div class="header40">
+      <h1>Rezultati</h1>
+    </div>
+    <div class="header30">
+      {{rangeVal}}
+    </div>
+  </div>
+  <div class="scrollHolder">
     <div class="resultsList">
       <div class="resultItem" ng-repeat="fileCompare in results">
-        <div class="leftFile">
-          <div class="fileTitle">{{fileCompare.orgFile.name}}</div>
-          <div class="stavki">
-            <span ng-repeat="stavek in fileCompare.orgFile.stavki">{{stavek}}</span>
+        <div class="fileCompare">
+          <div class="leftFileHolder">
+            <div class="fileFrame">
+              <div class="fileTitle">{{fileCompare.orgFile.name}}</div>
+              <div class="stavki">
+                <span class="stavek"
+                ng-class="primerjava._id"
+                ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}"
+                ng-mouseover="hoverItem(primerjava._id)"
+                ng-mouseleave="unhoverItem()"
+                ng-repeat="primerjava in fileCompare.cleanResults">{{primerjava.orgStavek}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="rightFileHolder">
+            <div class="fileFrame">
+              <div class="fileTitle">{{fileCompare.priFile.name}}</div>
+              <div class="stavki">
+                <span class="stavek"
+                ng-class="primerjava._id"
+                ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}"
+                ng-mouseover="hoverItem(primerjava._id)"
+                ng-mouseleave="unhoverItem()"
+                ng-repeat="primerjava in fileCompare.cleanResults">{{primerjava.priStavek}}</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="rightFile">
-          <div class="fileTitle">{{fileCompare.priFile.name}}</div>
-          <div class="stavki">
-            <span ng-repeat="stavek in fileCompare.priFile.stavki">{{stavek}}</span>
-          </div>
+        <div class="compareSummary">
+          <span>
+            Skupni rezultat: <span class="summaryBig">{{sumaVrednosti($index)}}%</span>
+          </span>
         </div>
       </div>
     </div>
+  </div>
 </div>

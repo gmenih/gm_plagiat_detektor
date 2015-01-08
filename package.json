@@ -1,20 +1,20 @@
 {
-	"name": "nw-plagiat-detektor",
-	"main": "index.html",
-	"description": "NW-Plagiat Detektor v0.1.5",
-	"version": "0.0.3",
-	"window": {
-		"title": "NW-Plagiat Detektor v0.0.4",
-		"width": 800,
-		"height": 430,
-		"min_height": 430,
-		"min_width": 500,
-		"toolbar": true,
-		"resizable": true
-	},
-	"maintainers": [{
-		"name": "Gregor Menih",
-		"email": "gmenih@gmail.com",
-		"web": "http://facebook.com/gmenih"
-	}]
+  "name": "nw-plagiat-detektor",
+  "main": "index.html",
+  "description": "NW-Plagiat Detektor v0.1.5",
+  "version": "0.0.3",
+  "window": {
+    "title": "NW-Plagiat Detektor v0.0.4",
+    "width": 800,
+    "height": 430,
+    "min_height": 430,
+    "min_width": 500,
+    "toolbar": false,
+    "resizable": true
+  },
+  "maintainers": [{
+    "name": "Gregor Menih",
+    "email": "gmenih@gmail.com",
+    "web": "http://facebook.com/gmenih"
+  }]
 }

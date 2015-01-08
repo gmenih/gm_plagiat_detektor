@@ -39,11 +39,12 @@ var Detektor = (function() {
       // stavki druge datoteke
       var priStavki = file2.stavki;
       // končni rezultat
-      var results = {
+      var rezultat = {
         orgFile: file1,
         priFile: file2,
-        comparisons: []
+        primerjave: []
       };
+      // index trenutnega stavka
       var i = 0,
         j = 0;
       // zanka ki preveri vse stavke prve datoteke
@@ -55,33 +56,36 @@ var Detektor = (function() {
         // zanka ki preveri vse stavke druge datoteke
         priStavki.forEach(function(priStavek) {
           // števec datotek, ki se ponavljajo
-          var wordCounter = [];
+          var stBesed = [];
           var priBesede = priStavek.toLowerCase().replace(regex,
             '').split(' ');
           // vsako besedo dodam v števec
           orgBesede.forEach(function(b) {
-            wordCounter[b] = 1;
+            stBesed[b] = 1;
           });
           var vsota = 0;
           // vsako besedo, ki se ponovi v drugem stavki povečam
           priBesede.forEach(function(b) {
-            if (b in wordCounter) {
-              wordCounter[b] += 1;
-              vsota += (wordCounter[b]);
+            if (b in stBesed) {
+              stBesed[b] += 1;
+              vsota += (stBesed[b]);
             }
           });
+          // izračunam % podobnosti stavkov
           vsota = vsota / (orgBesede.length + priBesede.length);
-          var comparison = {
+          // index stavkov in %
+          var primerjava = {
             orgStavek: i,
             priStavek: j,
             vrednost: vsota
           };
-          results.comparisons.push(comparison);
-          j++;
+          // dodam primerjavo v končni rezultat
+          rezultat.primerjave.push(primerjava);
+          j++; // index orgStavka
         })
-        i++;
+        i++; // index priStavka
       })
-      console.log(results);
+      return rezultat;
     }
   }
 })();

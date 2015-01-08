@@ -21,5 +21,15 @@
   <script src="classes.js" type="text/javascript"></script>
   <script src="app.js" type="text/javascript"></script>
 
+  <script>
+  var path = './';
+  var fs = require('fs');
+
+  fs.watch(path, function() {
+    if (location)
+      location.reload();
+    });
+    </script>
+
 </body>
 </html>

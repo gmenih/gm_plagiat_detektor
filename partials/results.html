@@ -1,15 +1,19 @@
-<div class="bodyDiv" id="pageTwo">
-  <div class="pageFrame">
-    <div class="elementRow">
-      <div class="elementRowBig">
-        <h1>Rezultati</h1>
-      </div>
-      <div class="elementRowSmall">
-        <input type="range" />
+<div class="bodyDiv">
+    <h1>Rezultati</h1>
+    <div class="resultsList">
+      <div class="resultItem" ng-repeat="fileCompare in results">
+        <div class="leftFile">
+          <div class="fileTitle">{{fileCompare.orgFile.name}}</div>
+          <div class="stavki">
+            <span ng-repeat="stavek in fileCompare.orgFile.stavki">{{stavek}}</span>
+          </div>
+        </div>
+        <div class="rightFile">
+          <div class="fileTitle">{{fileCompare.priFile.name}}</div>
+          <div class="stavki">
+            <span ng-repeat="stavek in fileCompare.priFile.stavki">{{stavek}}</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="fileResults" class="resultsList">
-
-    </div>
-  </div>
 </div>

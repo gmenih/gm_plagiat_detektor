@@ -1,6 +1,6 @@
 {
-  "cmd": "nw",
-  "args": ["{PROJECT_PATH}"],
-  "sh": false,
-  "cwd": ".."
+	"cmd": "nw",
+	"args": ["{PROJECT_PATH}"],
+	"sh": false,
+	"cwd": ".."
 }

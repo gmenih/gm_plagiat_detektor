@@ -9,7 +9,7 @@
     "height": 430,
     "min_height": 430,
     "min_width": 500,
-    "toolbar": false,
+    "toolbar": true,
     "resizable": true
   },
   "maintainers": [{

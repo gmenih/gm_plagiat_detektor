@@ -7,7 +7,6 @@ html,body {
 	width:100%;
 	height:100%;
 	position: relative;
-	overflow: hidden;
 }
 
 * {
@@ -17,78 +16,28 @@ html,body {
 	margin:0;
 	padding:0;
 }
-
-#windowControlBar {
-	height:23pt;
-	background:#212121;
-	-webkit-app-region:drag;
+.viewFrame
+{
+	display: block;
+	width: 100%;
+	height: 100%;
 }
-
-#windowTitle {
-	position:absolute;
-	left:30pt;
-	color:#f5f5f5;
-	line-height:20pt;
-	font-family:Oxygen;
-	font-size:11pt;
-}
-
-#windowControlBar ul {
-	position:absolute;
-	right:0;
-	list-style:none;
-	margin:1pt 3pt;
-}
-
-#windowControlBar ul li {
-	float:left;
-	margin-left:1pt;
-}
-
-#controlMinButton {
-	color:#f5f5f5;
-	font-size:12pt;
-	display:inline-block;
-	width:20pt;
-	text-align:center;
-	-webkit-transition:background 420ms;
-	-webkit-app-region:no-drag;
-}
-
-#controlMinButton:hover {
-	background:#1976D2;
-}
-
-#controlCloseButton {
-	color:#f5f5f5;
-	font-size:10pt;
-	display:inline-block;
-	height:15pt;
-	line-height:13pt;
-	text-align:center;
-	width:45px;
-	background:#E57373;
-	-webkit-transition:background 420ms;
-	-webkit-app-region:no-drag;
-}
-
-#controlCloseButton:hover {
-	background:#C62828;
-}
-
 .bodyDiv {
 	display:block;
 	background:#F6F6F6;
 	height:100%;
 	width: 100%;
-	position: absolute;
 	-webkit-transition:opacity 700ms;
 }
 
 .pageFrame {
 	width:90vw;
 	display:block;
-	margin:0 auto;
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	overflow: hidden;
 }
 
 .elementRow {
@@ -196,11 +145,6 @@ h1 {
 	font-family:Oxygen;
 	margin:15vh auto;
 }
-
-.blur {
-	-webkit-filter:blur(1pt);
-}
-
 #fileCounter {
 	font-family:Oxygen;
 	font-weight:300;
@@ -410,4 +354,14 @@ h1 {
 	left: 0;
 	background: rgba(69,69,69, .4);
 	z-index: 9999;
+}
+
+.hintToast
+{
+	height: 50px;
+	display: block;
+	position: absolute;
+	background: rgba(255,0,0,.3);
+	z-index: 9999;
+
 }

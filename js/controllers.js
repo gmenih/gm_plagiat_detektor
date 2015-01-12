@@ -41,8 +41,8 @@ app.controller('FileSelectController', function($scope, $location, SettingsServi
       // vse pomembne podatke shranim in jih pošljem naprej
       SettingsService.setFiles($scope.listOfFiles);
       SettingsService.setContent($scope.showContentCB);
-      SettingsService.sequence($scope.sequenceCB);
-      SettingsService.removeWords($scope.wordPurgeCB);
+      SettingsService.setSequence($scope.sequenceCB);
+      SettingsService.setRemoveWords($scope.wordPurgeCB);
       $location.path('/results');
       ResizeAnimate(1600, 950, 500);
     } else {
@@ -57,9 +57,10 @@ app.controller('ResultsController', function($scope, SettingsService) {
   // preberem vse datoteke
   $scope.listOfFiles = SettingsService.getFiles();
 
-  $scope.wordPurgeCB = SettingsService.getRemoveWords;
-  $scope.sequenceCB = SettingsService.getSequence;
-  $scope.showContentCB = SettingsService.getShowContent;
+  $scope.wordPurgeCB = SettingsService.getRemoveWords();
+  $scope.sequenceCB = SettingsService.getSequence();
+  $scope.showContentCB = SettingsService.getShowContent();
+  console.log($scope.wordPurgeCB, $scope.sequenceCB, $scope.showContentCB)
   // ustvarim dva klona datotek
   var orgFiles = $scope.listOfFiles.slice(0);
   var priFiles = $scope.listOfFiles.slice(0);
@@ -73,7 +74,6 @@ app.controller('ResultsController', function($scope, SettingsService) {
     });
   });
   $scope.results = finalResult;
-  Detektor.CleanResults(finalResult);
   console.log($scope.results);
   $scope.hoverItem = function(id) {
     if (angular.element('.' + id).length > 1)
@@ -82,15 +82,8 @@ app.controller('ResultsController', function($scope, SettingsService) {
   $scope.unhoverItem = function() {
     angular.element('.stavekHovered').removeClass('stavekHovered');
   };
-  $scope.i = 0;
 
-  var Sum = function(index) {
-    var vsota = 0;
-    var i = 0;
-    $scope.results[index].cleanResults.forEach(function(a) {
-      vsota += a.vrednost;
-      i++;
-    });
-    return Math.round((vsota / i) * 100);
-  };
+  $scope.toPercent = function(val){
+    return Math.round(val * 100);
+  }
 });

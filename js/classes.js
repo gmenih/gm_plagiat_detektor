@@ -5,7 +5,6 @@ var MyFile = function(file) {
   // extract file name
   this.name = file.name.split('.')[0];
   // vsebina datoteke
-  this.content = this.getContent();
   //dobi stavke
   this.stavki = this.getStavki();
 
@@ -21,10 +20,11 @@ MyFile.prototype.getContent = function() {
 };
 // razdeli vsebino na stavke
 MyFile.prototype.getStavki = function() {
+  var content = this.getContent();
   var arr = [];
   var regex = /([A-z0-9 ,čšžČŠŽ\(\)\[\]\&\%\+\-\=\:]+[.!?])/g;
   var match;
-  while (match = regex.exec(this.content)) {
+  while (match = regex.exec(content)) {
     arr.push(match[0]);
   }
   return arr;
@@ -60,7 +60,61 @@ Hint.prototype.show = function(element) {
 };
 // DETEKTOR
 var Detektor = (function() {
-  var badWords = ["oz. "];
+  var badWords = null;
+
+  var minimizeStavek = function(stavek) {
+    var regex = /([!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])([ ])?/g;
+    return stavek.toLowerCase().replace(regex, '').split(
+      ' ');
+  }
+  var getAvgPercent = function(results){
+    var v = 0, i =0;
+    results.forEach(function(result){
+      v+=result.vrednost;
+      i++;
+    })
+    return v  / i;
+  }
+
+  var removeBadWords = function(stavek) {
+    if (!badWords) {
+      badWords = fs.readFileSync('./data/badWords.json', 'utf-8', function(err, data) {
+        return JSON.parse(data);
+      });
+    }
+    stavek.forEach(function(word, index) {
+      if (badWords.indexOf(word) > -1) {
+        console.log('removing: ', word);
+        stavek.splice(index, 1);
+      }
+    })
+    return stavek;
+  }
+
+  var cleanResults = function(result) {
+    var cleanResults = []; // rezultat za vsak stavek za trenutno datoteko
+    for (var i = 0; i < result.orgFile.stavki.length; i++) { // loop čez vsak stavek
+      var maxPrimerjava = { // max
+        vrednost: -1
+      };
+      // loop čez vse primerjave za datoteko
+      result.primerjave.forEach(function(primerjava) {
+        if (primerjava.orgStavek == result.orgFile.stavki[i] &&
+          (primerjava.vrednost >
+            maxPrimerjava
+            .vrednost))
+          maxPrimerjava = primerjava;
+      });
+      // rezultat dodam v array
+      cleanResults[i] = maxPrimerjava;
+    }
+    //rezultat pripnem končnemu rezultatu
+    //odstranim neuporabne rezutlate
+    delete result.primerjave;
+    result.primerjave = cleanResults;
+    return result;
+  }
+
   return {
     StringMatch: function(file1, file2, wordPurge, checkSequence) {
       wordPurge = typeof wordPurge !== "undefined" ? wordPurge : false;
@@ -77,31 +131,19 @@ var Detektor = (function() {
       };
       // zanka ki preveri vse stavke prve datoteke
       orgStavki.forEach(function(orgStavek) {
-        var regex = /([!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])([ ])?/g;
+
         // spremenim v lowercase, odstranim nepomembne znake, ter razdelim
-        var orgBesede = orgStavek.toLowerCase().replace(regex, '').split(
-          ' ');
+        var orgBesede = minimizeStavek(orgStavek);
         if (wordPurge) {
-          this.badWords.forEach(function(badWord) {
-            var index = orgBesede.indexOf(badWord);
-            if (index > -1) {
-              orgBesede.splice(index, 1);
-            }
-          });
+          orgBesede = removeBadWords(orgBesede);
         }
         // zanka ki preveri vse stavke druge datoteke
         priStavki.forEach(function(priStavek) {
           // števec datotek, ki se ponavljajo
           var stBesed = [];
-          var priBesede = priStavek.toLowerCase().replace(regex,
-            '').split(' ');
+          var priBesede = minimizeStavek(priStavek);
           if (wordPurge) {
-            this.badWords.forEach(function(badWord) {
-              var index = orgBesede.indexOf(badWord);
-              if (index > -1) {
-                orgBesede.splice(index, 1);
-              }
-            });
+            priBesede = removeBadWords(priBesede);
           }
           // vsako besedo dodam v števec
           orgBesede.forEach(function(b) {
@@ -134,37 +176,9 @@ var Detektor = (function() {
           rezultat.primerjave.push(primerjava);
         });
       });
+      cleanResults(rezultat);
+      rezultat.skupnaVrednost = getAvgPercent(rezultat.primerjave);
       return rezultat;
-    },
-    /**
-		  Funkcija poišče najvišje ujemanje za vsak stavek.
-		*/
-    CleanResults: function(results) {
-      /*
-			  primerjave: [{orgStavek, priStavek, vrednost},{...}]
-			*/
-      // loop čez vse primerjave datotek
-      results.forEach(function(result) {
-        var cleanResults = []; // rezultat za vsak stavek za trenutno datoteko
-        for (var i = 0; i < result.orgFile.stavki.length; i++) { // loop čez vsak stavek
-          var maxPrimerjava = { // max
-            vrednost: -1
-          };
-          // loop čez vse primerjave za datoteko
-          result.primerjave.forEach(function(primerjava) {
-            if (primerjava.orgStavek == result.orgFile.stavki[i] &&
-              (primerjava.vrednost >
-                maxPrimerjava
-                .vrednost))
-              maxPrimerjava = primerjava;
-          });
-          // rezultat dodam v array
-          cleanResults[i] = maxPrimerjava;
-        }
-        //rezultat pripnem končnemu rezultatu
-        result.cleanResults = cleanResults;
-      });
-      return results;
     }
   };
 })();

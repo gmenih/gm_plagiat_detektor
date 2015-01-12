@@ -17,34 +17,46 @@
           <div class="leftFileHolder">
             <div class="fileFrame">
               <div class="fileTitle">{{fileCompare.orgFile.name}}</div>
+              <div class="no-results" ng-if='fileCompare.primerjave.length == 0'>Za to datoteko ni rezultatov.</div>
               <div class="stavki">
-                <span class="stavek"
-                ng-class="primerjava._id"
-                ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}"
-                ng-mouseover="hoverItem(primerjava._id)"
-                ng-mouseleave="unhoverItem()"
-                ng-repeat="primerjava in fileCompare.cleanResults">{{primerjava.orgStavek}}</span>
+                <span class="stavek" ng-class="primerjava._id" ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}" ng-mouseover="hoverItem(primerjava._id)" ng-mouseleave="unhoverItem()" ng-repeat="primerjava in fileCompare.primerjave">{{primerjava.orgStavek}}</span>
               </div>
             </div>
           </div>
           <div class="rightFileHolder">
             <div class="fileFrame">
               <div class="fileTitle">{{fileCompare.priFile.name}}</div>
+              <div class="no-results" ng-if='fileCompare.primerjave.length == 0'>Za to datoteko ni rezultatov.</div>
               <div class="stavki">
-                <span class="stavek"
-                ng-class="primerjava._id"
-                ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}"
-                ng-mouseover="hoverItem(primerjava._id)"
-                ng-mouseleave="unhoverItem()"
-                ng-repeat="primerjava in fileCompare.cleanResults">{{primerjava.priStavek}}</span>
+                <span class="stavek" ng-class="primerjava._id" ng-style="{'background': 'rgba(185,44,8,'+(primerjava.vrednost * 0.7)+')'}" ng-mouseover="hoverItem(primerjava._id)" ng-mouseleave="unhoverItem()" ng-repeat="primerjava in fileCompare.primerjave">{{primerjava.priStavek}}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="compareSummary">
-          <span>
-            Skupni rezultat: <span class="summaryBig">{{fileCompare.avgResult}}%</span>
-          </span>
+          <div class="compare25">
+            <span>
+              Skupni rezultat:
+              <span class="summaryBig">{{toPercent(fileCompare.skupnaVrednost)}}%</span>
+            </span>
+          </div>
+          <div class="compare25">
+            <span>
+              Zaporedje besed: 10%
+            </span>
+          </div>
+          <div class="compare25">
+            <span>
+              Enake besede:
+              <span>beseda1, beseda2</span>
+            </span>
+          </div>
+          <div class="compare25">
+            <span>
+              Trenutni stavek:
+              <span class="summaryBig">{{toPercent(fileCompare.skupnaVrednost)}}%</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>

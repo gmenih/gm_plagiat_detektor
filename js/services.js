@@ -12,22 +12,34 @@ app.factory('SettingsService', function() {
     return FileList;
   };
   var setContent = function(ct) {
+    console.log('setting content to', ct);
     showContent = ct;
   };
-  var setRWords = function(bool){
+  var setRWords = function(bool) {
+    console.log('setting remove to', bool);
     removeWords = bool;
   };
-  var setSequence = function(bool){
-      checkSequence = bool;
+  var setSequence = function(bool) {
+    console.log('setting sequence to', bool);
+    checkSequence = bool;
+  };
+  var getShowContent = function() {
+    return showContent;
+  };
+  var getRemoveWords = function() {
+    return removeWords;
+  };
+  var getCheckSequence = function() {
+    return checkSequence;
   };
   return {
     setFiles: setFiles,
     getFiles: getFiles,
     setContent: setContent,
-    removeWords: setRWords,
-    sequence: setSequence,
-    getShowContent: showContent,
-    getRemoveWords: removeWords,
-    getSequence: checkSequence
+    setRemoveWords: setRWords,
+    setSequence: setSequence,
+    getShowContent: getShowContent,
+    getRemoveWords: getRemoveWords,
+    getSequence: getCheckSequence
   };
 });

@@ -333,15 +333,23 @@ h1 {
 .compareSummary
 {
 	display: block;
+	text-align: center;
 	width: 100%;
 	background: rgba(33,33,33,.1);
 	-webkit-transition: all 420;
+	padding: 14px;
 }
-.compareSummary > span
+.compareSummary > .compare25
+{
+	margin: 0;
+	width: 20%;
+	text-align: center;
+	display: inline-block;
+
+}
+.compare25 > span
 {
 	padding: 14px;
-	text-align: center;
-	display: block;
 }
 
 .bodyDisabled

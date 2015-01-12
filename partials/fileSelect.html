@@ -1,4 +1,4 @@
-<div class="bodyDiv">
+<div class="bodyDiv" id="fsPage">
   <div class="bodyDisabled" ng-if="dialogOpen"></div>
   <div class="pageFrame">
     <div class="elementRow">
@@ -25,12 +25,12 @@
     <div class="elementRow">
       <div class="elementRowLeft">
         <div class="elementRowSmall">
-          <label for="stringMatchCB">Uporabi String Matching</label>
-          <input type="checkbox" ng-model="stringMatchCB" />
+          <label for="cb1" title="Odstrani besede, ki stavku ne dajo pomena.">Odstrani vezne besede</label>
+          <input id="cb1" type="checkbox" ng-model="wordPurgeCB" />
         </div>
         <div class="elementRowSmall">
-          <label for="cb2" title="Prikaže samo rezultate, ki imajo višjo podovnost kot rezultati enako primerjanih datotek.">Počisti rezultate</label>
-          <input id="cb2" type="checkbox" ng-model="clearResultsCB" />
+          <label for="cb2" title="Ali si besede sledijo v enakem vrsnem redu?">Preveri zaporedje beseed</label>
+          <input id="cb2" type="checkbox" ng-model="sequenceCB" />
         </div>
       </div>
       <div class="elementRowRight">
@@ -45,8 +45,8 @@
     </div>
     <div class="elementRow">
       <div class="elementRowBig" style="text-align: center;">
-        <input type="checkbox" ng-model="showContentCB">
-        <label for="prikaziVsebinoCB">Prikaži vsebino dokumentov.</label>
+        <input type="checkbox" ng-model="showContentCB" id="cb3" />
+        <label for="cn3">Prikaži vsebino dokumentov.</label>
       </div>
     </div>
     <div class="elementRow" >

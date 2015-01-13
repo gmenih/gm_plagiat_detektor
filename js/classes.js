@@ -64,16 +64,22 @@ var Detektor = (function() {
 
   var minimizeStavek = function(stavek) {
     var regex = /([!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])([ ])?/g;
-    return stavek.toLowerCase().replace(regex, '').split(
+    var stavek = stavek.toLowerCase().replace(regex, '').split(
       ' ');
+    stavek.forEach(function(word, index) {
+      if (!isNaN(word))
+        stavek.splice(index, 1);
+    })
+    return stavek;
   }
-  var getAvgPercent = function(results){
-    var v = 0, i =0;
-    results.forEach(function(result){
-      v+=result.vrednost;
+  var getAvgPercent = function(results) {
+    var v = 0,
+      i = 0;
+    results.forEach(function(result) {
+      v += result.vrednost;
       i++;
     })
-    return v  / i;
+    return v / i;
   }
 
   var removeBadWords = function(stavek) {
@@ -84,7 +90,6 @@ var Detektor = (function() {
     }
     stavek.forEach(function(word, index) {
       if (badWords.indexOf(word) > -1) {
-        console.log('removing: ', word);
         stavek.splice(index, 1);
       }
     })
@@ -115,6 +120,35 @@ var Detektor = (function() {
     return result;
   }
 
+  var sequenceCheck = function(orgBesede, priBesede, wordCounter) {
+    var sekvence = {};
+    orgBesede.forEach(function(b, index) {
+      if (!(b in wordCounter))
+        orgBesede.splice(index, 1);
+    });
+    priBesede.forEach(function(b, index) {
+      if (!(b in wordCounter))
+        priBesede.splice(index, 1);
+    });
+    var usedWords = 0;
+    var sekvLength = 0;
+    for (var word in wordCounter) {
+      if (wordCounter[word] == 2) {
+        usedWords++;
+        var razlika = Math.abs(orgBesede.indexOf(word) - priBesede.indexOf(word));
+        if (!sekvence[razlika]){
+          sekvence[razlika] = [];
+          sekvLength++;
+        }
+        sekvence[razlika].push(word);
+      }
+    }
+    for(var sek in sekvence){
+      sekvence[sek].overall = (sekvence[sek].length / usedWords);
+    }
+    return sekvence;
+  }
+
   return {
     StringMatch: function(file1, file2, wordPurge, checkSequence) {
       wordPurge = typeof wordPurge !== "undefined" ? wordPurge : false;
@@ -140,7 +174,7 @@ var Detektor = (function() {
         // zanka ki preveri vse stavke druge datoteke
         priStavki.forEach(function(priStavek) {
           // števec datotek, ki se ponavljajo
-          var stBesed = [];
+          var stBesed = {};
           var priBesede = minimizeStavek(priStavek);
           if (wordPurge) {
             priBesede = removeBadWords(priBesede);
@@ -173,6 +207,7 @@ var Detektor = (function() {
             wordCounter: stBesed
           };
           // dodam primerjavo v končni rezultat
+          primerjava.sekvenca = sequenceCheck(orgBesede, priBesede, stBesed);
           rezultat.primerjave.push(primerjava);
         });
       });

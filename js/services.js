@@ -1,9 +1,10 @@
-//services.js
+//service za prenos podatkov med okni
 app.factory('SettingsService', function() {
   var FileList = [];
   var showContent = false;
   var removeWords = false;
   var checkSequence = false;
+  var results = null;
 
   var setFiles = function(files) {
     FileList = files;
@@ -12,17 +13,17 @@ app.factory('SettingsService', function() {
     return FileList;
   };
   var setContent = function(ct) {
-    console.log('setting content to', ct);
     showContent = ct;
   };
   var setRWords = function(bool) {
-    console.log('setting remove to', bool);
     removeWords = bool;
   };
   var setSequence = function(bool) {
-    console.log('setting sequence to', bool);
     checkSequence = bool;
   };
+  var setResults = function(json){
+    results = json;
+  }
   var getShowContent = function() {
     return showContent;
   };
@@ -32,6 +33,9 @@ app.factory('SettingsService', function() {
   var getCheckSequence = function() {
     return checkSequence;
   };
+  var getResults = function(){
+    return results;
+  }
   return {
     setFiles: setFiles,
     getFiles: getFiles,
@@ -40,6 +44,8 @@ app.factory('SettingsService', function() {
     setSequence: setSequence,
     getShowContent: getShowContent,
     getRemoveWords: getRemoveWords,
-    getSequence: getCheckSequence
+    getSequence: getCheckSequence,
+    setResults: setResults,
+    getResults: getResults
   };
 });

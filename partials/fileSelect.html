@@ -1,4 +1,4 @@
-<div class="bodyDiv" id="fsPage">
+<div class="bodyDiv">
   <div class="bodyDisabled" ng-if="dialogOpen"></div>
   <div class="pageFrame">
     <div class="elementRow">
@@ -19,7 +19,7 @@
         <input ng-model="hiddenFileDialog" id="hiddenFileDialog" type="file" multiple accept=".txt" hidden />
       </div>
       <div data-fail="true" class="elementRowSmall" style="text-align: center; font-size: 11pt; opacity:0.7;">
-        Dovoljeni tipi: .txt, .doc, .docx
+        Dovoljeni tipi: .txt
       </div>
     </div>
     <div class="elementRow">
@@ -29,7 +29,7 @@
           <input id="cb1" type="checkbox" ng-model="wordPurgeCB" />
         </div>
         <div class="elementRowSmall">
-          <label for="cb2" title="Ali si besede sledijo v enakem vrsnem redu?">Preveri zaporedje beseed</label>
+          <label for="cb2" title="Ali si besede sledijo v enakem vrsnem redu?">Preveri zaporedje besed</label>
           <input id="cb2" type="checkbox" ng-model="sequenceCB" />
         </div>
       </div>
@@ -46,14 +46,19 @@
     <div class="elementRow">
       <div class="elementRowBig" style="text-align: center;">
         <input type="checkbox" ng-model="showContentCB" id="cb3" />
-        <label for="cn3">Prikaži vsebino dokumentov.</label>
+        <label for="cb3">Prikaži vsebino dokumentov.</label>
       </div>
     </div>
-    <div class="elementRow" >
+    <div class="elementRow">
       <div class="elementRowBig" style="text-align: center;">
         <a class="finishButton" ng-click="CheckFiles()">
           Preveri
         </a>
+      </div>
+    </div>
+    <div class="elementRow">
+      <div class="elementRowSmall" style="text-align: center;">
+        <a href="#" class="openLink" ng-click="openSavedResult()">Odpri shranjen rezultat</a>
       </div>
     </div>
   </div>

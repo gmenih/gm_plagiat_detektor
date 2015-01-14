@@ -1,15 +1,15 @@
 {
   "name": "nw-plagiat-detektor",
   "main": "index.html",
-  "description": "NW-Plagiat Detektor v0.1.5",
-  "version": "0.0.3",
+  "description": "NW-Plagiat Detektor v1",
+  "version": "1",
   "window": {
-    "title": "NW-Plagiat Detektor v0.0.4",
+    "title": "NW-Plagiat Detektor v1",
     "width": 800,
-    "height": 430,
-    "min_height": 430,
+    "height": 460,
+    "min_height": 450,
     "min_width": 500,
-    "toolbar": true,
+    "toolbar": false,
     "resizable": true
   },
   "maintainers": [{

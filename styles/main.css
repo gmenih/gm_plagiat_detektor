@@ -28,6 +28,7 @@ html,body {
 	height:100%;
 	width: 100%;
 	-webkit-transition:opacity 700ms;
+	overflow: hidden;
 }
 
 .pageFrame {
@@ -237,6 +238,7 @@ h1 {
 	width: 30%;
 	display: block;
 	float: left;
+	display: block;
 }
 .header40
 {
@@ -295,33 +297,9 @@ h1 {
 {
 	padding: 5px 14px;
 }
-.stavek
-{
-	-webkit-transition: all 420ms;
-}
-.compareL45
-{
-	background: #d0ffb7;
-}
-.compareL60
-{
-	background: #e4c874;
-}
-.compareL75
-{
-	background: #d57c2f;
-}
-.compareL90
-{
-	background: #b03328
-}
-.compareL100
-{
-	background: red;
-}
 .stavekHovered
 {
-	border-bottom: 1px blue solid;
+	border-bottom: 1px black dashed;
 }
 .fileCompare:after
 {
@@ -335,21 +313,29 @@ h1 {
 	display: block;
 	text-align: center;
 	width: 100%;
-	background: rgba(33,33,33,.1);
+	background: rgba(33,33,33,.33);
 	-webkit-transition: all 420;
-	padding: 14px;
+	padding: 14px 0;
+	margin-top: 15px;
 }
-.compareSummary > .compare25
+.compareSummary > .compare30
 {
 	margin: 0;
-	width: 20%;
+	width: 29%;
 	text-align: center;
 	display: inline-block;
-
 }
-.compare25 > span
+.compare30 .compareTitle
 {
-	padding: 14px;
+	display: block;
+	text-transform: uppercase;
+	font-size: 11px;
+	padding-bottom: 6px;
+}
+.compare30 .compareBig
+{
+	font-weight: 700;
+	font-size: 18px;
 }
 
 .bodyDisabled
@@ -369,7 +355,88 @@ h1 {
 	height: 50px;
 	display: block;
 	position: absolute;
-	background: rgba(255,0,0,.3);
+	line-height: 50px;
+	padding: 0 7px;
+	background: rgba(200,0,0,.7);
 	z-index: 9999;
+	font-family: Oxygen;
+	font-weight: 700;
+}
+.hintToast:after
+{
+	width:0;
+	height: 0;
+	display: block;
+	border-top: 8px rgba(200,0,0,.7) solid;
+	border-right: 8px transparent solid;
+	border-left: 8px transparent solid;
+	content: ' ';
+	position: absolute;
+	bottom: -8px;
+	left: 3px;
+}
+.hintToast:hover
+{
+	background: rgba(200,0,0,1);
+	border-top-color: rgba(200,0,0,1);
+}
+.hintToast:hover:after
+{
+	border-top-color: rgba(200,0,0,1);
+}
+.cbHolder
+{
+	height: 25px;
+	margin-top: 12px;
+	display: block;
+	text-align: center;
+	font-family: Oxygen;
+	padding: 6px;
+}
+.cbHolder label
+{
+	margin-left: 6px;
+}
 
+.saveButton
+{
+	height: 25px;
+	float: right;
+	line-height: 25px;
+	margin: 8px 12px 0 0;
+	padding: 6px;
+	border: 1px #424242 solid;
+	background: #9e9e9e;
+	font-family: Oxygen;
+}
+.saveButton:hover
+{
+	background: #0277BD;
+	color: #f6f6f6
+}
+.saveButton:active
+{
+	background: #01579B;
+}
+
+.openLink, .openLink:visited
+{
+	color: #0277BD;
+	text-decoration: none;
+	cursor: pointer;
+}
+.openLink:hover
+{
+	color: #01579B;
+}
+
+.openIcon
+{
+	font-family: entypo;
+	font-style: normal;
+	float: right;
+	margin-right: 7px;
+	font-size: 37px;
+	line-height: 1px;
+	cursor: pointer;
 }
